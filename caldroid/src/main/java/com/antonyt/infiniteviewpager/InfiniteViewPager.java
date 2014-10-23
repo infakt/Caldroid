@@ -121,13 +121,12 @@ public class InfiniteViewPager extends ViewPager {
 		int width = getMeasuredWidth();
 
 		// Use the previously measured width but simplify the calculations
-		widthMeasureSpec = MeasureSpec.makeMeasureSpec(width,
-				MeasureSpec.EXACTLY);
+		widthMeasureSpec = MeasureSpec.makeMeasureSpec(width, MeasureSpec.EXACTLY);
 
-			/*
-			 * If the pager actually has any children, take the first child's
-			 * height and call that our own
-			 */
+		/*
+		 * If the pager actually has any children, take the first child's
+		 * height and call that our own
+		 */
 		if (getChildCount() > 0) {
 			View firstChild = getChildAt(0);
 
