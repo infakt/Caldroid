@@ -1,9 +1,5 @@
 package com.antonyt.infiniteviewpager;
 
-import hirondelle.date4j.DateTime;
-
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -11,10 +7,13 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
+import java.util.ArrayList;
+
+import hirondelle.date4j.DateTime;
+
 /**
  * A {@link ViewPager} that allows pseudo-infinite paging with a wrap-around
  * effect. Should be used with an {@link InfinitePagerAdapter}.
- * 
  */
 public class InfiniteViewPager extends ViewPager {
 
@@ -86,28 +85,22 @@ public class InfiniteViewPager extends ViewPager {
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		if (enabled) {
-			return super.onTouchEvent(event);
-		}
-		return false;
+		return enabled && super.onTouchEvent(event);
 	}
 
 	@Override
 	public boolean onInterceptTouchEvent(MotionEvent event) {
-		if (enabled) {
-			return super.onInterceptTouchEvent(event);
-		}
-		return false;
+		return enabled && super.onInterceptTouchEvent(event);
 	}
 
 	/**
 	 * ViewPager does not respect "wrap_content". The code below tries to
 	 * measure the height of the child and set the height of viewpager based on
 	 * child height
-	 * 
+	 * <p/>
 	 * It was customized from
 	 * http://stackoverflow.com/questions/9313554/measuring-a-viewpager
-	 * 
+	 * <p/>
 	 * Thanks Delyan for his brilliant code
 	 */
 	@Override
@@ -117,40 +110,34 @@ public class InfiniteViewPager extends ViewPager {
 		// Calculate row height
 		int rows = datesInMonth.size() / 7;
 
-		boolean wrapHeight = MeasureSpec.getMode(heightMeasureSpec) == MeasureSpec.AT_MOST;
 
-		int height = getMeasuredHeight();
-		if (wrapHeight && rowHeight == 0) {
-			/*
-			 * The first super.onMeasure call made the pager take up all the
-			 * available height. Since we really wanted to wrap it, we need to
-			 * remeasure it. Luckily, after that call the first child is now
-			 * available. So, we take the height from it.
-			 */
+		/*
+		* The first super.onMeasure call made the pager take up all the
+		* available height. Since we really wanted to wrap it, we need to
+		* remeasure it. Luckily, after that call the first child is now
+				* available. So, we take the height from it.
+				*/
 
-			int width = getMeasuredWidth();
+		int width = getMeasuredWidth();
 
-			// Use the previously measured width but simplify the calculations
-			widthMeasureSpec = MeasureSpec.makeMeasureSpec(width,
-					MeasureSpec.EXACTLY);
+		// Use the previously measured width but simplify the calculations
+		widthMeasureSpec = MeasureSpec.makeMeasureSpec(width,
+				MeasureSpec.EXACTLY);
 
 			/*
 			 * If the pager actually has any children, take the first child's
 			 * height and call that our own
 			 */
-			if (getChildCount() > 0) {
-				View firstChild = getChildAt(0);
+		if (getChildCount() > 0) {
+			View firstChild = getChildAt(0);
 
 				/*
 				 * The child was previously measured with exactly the full
 				 * height. Allow it to wrap this time around.
 				 */
-				firstChild.measure(widthMeasureSpec, MeasureSpec
-						.makeMeasureSpec(height, MeasureSpec.AT_MOST));
+			firstChild.measure(widthMeasureSpec, MeasureSpec.makeMeasureSpec(MEASURED_SIZE_MASK, MeasureSpec.AT_MOST));
 
-				height = firstChild.getMeasuredHeight();
-				rowHeight = height / rows;
-			}
+			rowHeight = firstChild.getMeasuredHeight() / rows;
 		}
 
 		// Calculate height of the calendar
@@ -166,10 +153,10 @@ public class InfiniteViewPager extends ViewPager {
 		// Prevent small vertical scroll
 		calHeight += 3;
 
-		heightMeasureSpec = MeasureSpec.makeMeasureSpec(calHeight,
-				MeasureSpec.EXACTLY);
+		heightMeasureSpec = MeasureSpec.makeMeasureSpec(calHeight, MeasureSpec.EXACTLY);
 
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
 	}
 
 }
