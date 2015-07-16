@@ -40,9 +40,9 @@ public abstract class CaldroidListener {
 	 */
 	public void onChangeMonth(int month, int year) {
 		// Do nothing
-	};
+	}
 
-	
+
 	/**
 	 * Inform client that CaldroidFragment view has been created and views are
 	 * no longer null. Useful for customization of button and text views
