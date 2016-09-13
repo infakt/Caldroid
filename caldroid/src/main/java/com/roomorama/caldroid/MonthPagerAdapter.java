@@ -1,10 +1,12 @@
 package com.roomorama.caldroid;
 
+
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.support.v13.app.FragmentPagerAdapter;
+
 import java.util.ArrayList;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 
 /**
  * MonthPagerAdapter holds 4 fragments, which provides fragment for current

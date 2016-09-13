@@ -2,12 +2,12 @@ package com.roomorama.caldroid;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.app.DialogFragment;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.text.format.DateUtils;
 import android.text.format.Time;
