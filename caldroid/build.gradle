@@ -18,8 +18,7 @@ android {
 }
 
 dependencies {
-    compile 'androidx.legacy:legacy-support-v13:1.0.0'
-    compile 'com.darwinsys:hirondelle-date4j:1.5.0'
+    implementation 'androidx.viewpager:viewpager:1.0.0'
+    implementation 'androidx.fragment:fragment:1.0.0'
+    api 'com.darwinsys:hirondelle-date4j:1.5.0'
 }
-
-//apply from: 'https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle'
