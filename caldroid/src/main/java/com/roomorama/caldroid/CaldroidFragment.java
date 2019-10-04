@@ -5,11 +5,6 @@ import android.app.Dialog;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
-
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
 import android.text.format.DateUtils;
 import android.text.format.Time;
 import android.view.LayoutInflater;
@@ -24,11 +19,14 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
 
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.viewpager.widget.ViewPager.OnPageChangeListener;
+
 import com.antonyt.infiniteviewpager.InfinitePagerAdapter;
 import com.antonyt.infiniteviewpager.InfiniteViewPager;
 import com.caldroid.R;
 
-import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -1438,20 +1436,4 @@ public class CaldroidFragment extends DialogFragment {
 
 	}
 
-	@Override
-	public void onDetach() {
-		super.onDetach();
-
-		try {
-			Field childFragmentManager = Fragment.class
-					.getDeclaredField("mChildFragmentManager");
-			childFragmentManager.setAccessible(true);
-			childFragmentManager.set(this, null);
-
-		} catch (NoSuchFieldException e) {
-			throw new RuntimeException(e);
-		} catch (IllegalAccessException e) {
-			throw new RuntimeException(e);
-		}
-	}
 }
